@@ -3,6 +3,11 @@
   "private": false,
   "version": "1.0.2",
   "type": "module",
+  "main": "dist/yuugen-ui.js",
+  "types": "dist/main.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
