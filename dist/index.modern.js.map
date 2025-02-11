@@ -1,1 +1,0 @@
-{"version":3,"file":"index.modern.js","sources":["../src/index.js"],"sourcesContent":["export const CapitalizeFirst = ({ str }) => {\r\n\treturn str.charAt(0).toUpperCase() + str.slice(1);\r\n};\r\n"],"names":["CapitalizeFirst","str","charAt","toUpperCase","slice"],"mappings":"AAAa,MAAAA,EAAkBA,EAAGC,SAC1BA,EAAIC,OAAO,GAAGC,cAAgBF,EAAIG,MAAM"}
