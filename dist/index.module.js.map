@@ -1,0 +1,1 @@
+{"version":3,"file":"index.module.js","sources":["../src/index.js"],"sourcesContent":["export const CapitalizeFirst = ({ str }) => {\r\n\treturn str.charAt(0).toUpperCase() + str.slice(1);\r\n};\r\n"],"names":["CapitalizeFirst","_ref","str","charAt","toUpperCase","slice"],"mappings":"AAAa,IAAAA,EAAkB,SAAHC,OAAMC,EAAGD,EAAHC,IACjC,OAAOA,EAAIC,OAAO,GAAGC,cAAgBF,EAAIG,MAAM,EAChD"}
