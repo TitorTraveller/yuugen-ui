@@ -9,13 +9,10 @@
   "files": [
     "dist",
     "dist/*.css",
-    "lib/components/*/index.tsx"
+    "dist/components/*/index.tsx"
   ],
   "exports": {
-    ".": {
-      "import": "./dist/components/index.js",
-      "require": "./dist/components/index.js"
-    }
+    "./components": "./dist/components/index.js"
   },
   "scripts": {
     "dev": "vite",
