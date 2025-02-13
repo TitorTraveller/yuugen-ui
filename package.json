@@ -12,7 +12,10 @@
     "dist/components/*/index.tsx"
   ],
   "exports": {
-    "./components": "./dist/components/index.js"
+    "./components/*": {
+      "import": "./dist/components/*/*.js",
+      "require": "./dist/components/*/*.js"
+    }
   },
   "scripts": {
     "dev": "vite",
