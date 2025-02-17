@@ -22,17 +22,17 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
-    "outDir": "dist",
     "declaration": true,
     "declarationDir": "dist",
     "declarationMap": true,
     "emitDeclarationOnly": true,
     "esModuleInterop": true,
-
+    
     /* Alias Import Mode*/
     "baseUrl": "./",
+    "outDir": "dist",
     "paths": {
-      "yuugen-ui/*": ["lib/components/"]
+      "yuugen-ui/*": ["lib/*"]
     }
   },
   "include": ["lib", "vite-env.d.ts"]

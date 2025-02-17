@@ -18,7 +18,14 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* Alias Import Mode*/
+    "baseUrl": "./",
+    "outDir": "dist",
+    "paths": {
+      "yuugen-ui/*": ["lib/*"]
+    }
   },
   "include": ["vite.config.ts"]
 }

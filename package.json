@@ -3,12 +3,20 @@
   "private": false,
   "version": "1.0.5",
   "type": "module",
-  "main": "dist/main.js",
-  "module": "dist/main.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist",
-    "dist/*.css"
+    "dist/*.css",
+    "dist/components/*/index.tsx"
   ],
+  "exports": {
+    "./components/*": {
+      "import": "./dist/components/*/*.js",
+      "require": "./dist/components/*/*.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
