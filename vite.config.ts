@@ -3,10 +3,12 @@ import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
 import { resolve } from 'path'
 import { libInjectCss} from "vite-plugin-lib-inject-css"
+import inspect from "vite-plugin-inspect"
 
 export default defineConfig({
   plugins: [
     react(),
+    inspect(),
     libInjectCss(),
     dts({
       include: ["lib/components/"],
