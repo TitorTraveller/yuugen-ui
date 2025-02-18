@@ -1,14 +1,14 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import dts from "vite-plugin-dts";
 import { resolve } from 'path'
 import { libInjectCss} from "vite-plugin-lib-inject-css"
+import inspect from "vite-plugin-inspect"
 
 export default defineConfig({
   plugins: [
     react(),
-    vanillaExtractPlugin(),
+    inspect(),
     libInjectCss(),
     dts({
       include: ["lib/components/"],
