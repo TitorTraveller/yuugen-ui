@@ -1,7 +1,7 @@
 {
   "name": "yuugen-ui",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.6",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -23,13 +23,12 @@
     }
   },
   "scripts": {
-    "dev": "vite",
+    "build:lib": "tsc -b && npm run clean && vite build",
+    "build:storybook": "storybook build",
+    "publish:npm": "npm version patch && npm publish",
+    "release": "npm run build:lib && npm run publish:npm && npm run build:storybook",
     "clean": "rimraf dist",
-    "build": "tsc -b && npm run clean && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "storybook": "storybook dev -p 6006"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
