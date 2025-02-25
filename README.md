@@ -1,50 +1,143 @@
-# React + TypeScript + Vite
+# 📦 yuugen UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Main external component library for yuugen apps.
 
-Currently, two official plugins are available:
+## 🚀 Main Specs
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   🔹 Built with [React Typescript](w) & [Material UI](w)
+-   🔹 Bundled with [Vite](w)
+-   🔹 Interactive documentation with [Storybook](w)
+-   🔹 Plug and play library
 
-## Expanding the ESLint configuration
+## 📦 Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```sh
+npm install yuugen-ui@latest
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+---
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 📂 Directories Structure
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+yuugen-ui/
+│── lib/
+│   ├── components/
+│   │   ├── Button/
+│   │   │   ├── Button.stories.tsx
+│   │   │   ├── Button.styles.ts
+│   │   │   ├── Button.tsx
+│   │   │   ├── index.tsx
+│   ├── styles/
+│   │   ├── theme.ts
+│── .storybook/
+│── vite.config.ts
+│── tsconfig.app.json
+│── package.json
 ```
+
+---
+
+## 🔧 Main Scripts Commands
+
+```sh
+npm run build     # Generates build on /dist folder
+npm run storybook # Starts Storybook's server to visualize component suite
+npm run build-storybook # Generates static storybook's folder to serve
+```
+
+---
+
+## 🎨 Components and Styles Usage
+
+### **Importing Components**
+
+```tsx
+import { Button } from "yuugen-ui/components/Button";
+
+function App() {
+	return (
+		<>
+			<Button variantStyle="primary" size="small">
+				Click Me
+			</Button>
+		</>
+	);
+}
+
+export default App;
+```
+
+---
+
+### **Vite `vite.config.ts` settings declaration**
+
+```ts
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import dts from "vite-plugin-dts";
+import { resolve } from "path";
+import { libInjectCss } from "vite-plugin-lib-inject-css";
+
+export default defineConfig({
+	plugins: [
+		react(),
+		libInjectCss(),
+		dts({
+			include: ["lib"],
+			outDir: "dist/types",
+			entryRoot: "lib",
+			insertTypesEntry: false,
+			tsconfigPath: resolve(__dirname, "tsconfig.app.json"),
+		}),
+	],
+	build: {
+		copyPublicDir: false,
+		lib: {
+			entry: resolve(__dirname, "lib/components/index.tsx"),
+			name: "yuugen-ui",
+			formats: ["es"],
+		},
+		rollupOptions: {
+			external: ["react", "react-dom"],
+			output: {
+				dir: "dist",
+				preserveModules: true,
+				preserveModulesRoot: "lib",
+				chunkFileNames: "chunks/[name].[hash].js",
+				assetFileNames: "assets/[name][extname]",
+				entryFileNames: "[name].js",
+				globals: {
+					react: "React",
+					"react-dom": "ReactDOM",
+				},
+			},
+		},
+	},
+	resolve: {
+		alias: {
+			"yuugen-ui/components": resolve(__dirname, "lib/components"),
+		},
+	},
+});
+```
+
+---
+
+## 📘 Storybook Playground
+
+Run this command to start Storybook local server to visualize/interact with components
+
+```sh
+npm run storybook
+```
+
+Go to `http://localhost:6006` to manually open Storybook's playground
+
+---
+
+## 👥 Contributors
+
+-   [@TitorTraveller](https://github.com/TitorTraveller)
+
+---

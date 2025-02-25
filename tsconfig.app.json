@@ -33,7 +33,8 @@
     "outDir": "dist",
     "paths": {
       "yuugen-ui/*": ["lib/*"]
-    }
+    },
+    "resolveJsonModule": true,
   },
-  "include": ["lib", "vite-env.d.ts"]
+  "include": ["vite-env.d.ts", "lib", "lib/types/declarations.d.ts"]
 }

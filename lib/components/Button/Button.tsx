@@ -1,29 +1,38 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import { ButtonProps } from "@mui/material/Button";
-import { withTheme } from "../../styles/withTheme";
-import theme from "../../styles/theme";
-
+import { styles } from "./Button.styles";
 interface CustomButtonProps extends ButtonProps {
 	children: React.ReactNode;
+	variantStyle?:
+		| "primary"
+		| "primary-outline"
+		| "secondary"
+		| "secondary-outline"
+		| "transparent-primary"
+		| "transparent-secondary";
+	size?: "medium" | "small";
+	leftIcon?: React.ReactNode;
+	rightIcon?: React.ReactNode;
+	iconButtonMode?: boolean;
 }
 
-function CustomButton({ children, ...props }: CustomButtonProps) {
+function CustomButton({
+	children,
+	variantStyle = "primary",
+	size = "medium",
+	leftIcon,
+	rightIcon,
+	iconButtonMode = false,
+	...props
+}: CustomButtonProps) {
 	return (
-		<Button
-			{...props}
-			sx={{
-				backgroundColor: theme.palette.custom["blue-700"],
-				border: `1px solid ${theme.palette.custom["blue-700"]}`,
-				borderRadius: "4px",
-				alignItems: "center",
-			}}
-		>
-			{children}
+		<Button {...props} sx={styles(variantStyle, size, iconButtonMode)}>
+			{leftIcon && <span className="left-icon">{leftIcon}</span>}
+			{!iconButtonMode && <span className="text-span">{children}</span>}
+			{rightIcon && !iconButtonMode && <span className="right-icon">{rightIcon}</span>}
 		</Button>
 	);
 }
 
-const ThemedCustomButton = withTheme(CustomButton) as React.FC<CustomButtonProps>;
-ThemedCustomButton.displayName = "ThemedCustomButton";
-export default ThemedCustomButton;
+export default CustomButton;
