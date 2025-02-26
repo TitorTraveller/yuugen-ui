@@ -28,7 +28,8 @@
     "publish:npm": "npm version patch && npm publish",
     "release": "npm run build:lib && npm run publish:npm && npm run build:storybook",
     "clean": "rimraf dist",
-    "storybook": "storybook dev -p 6006"
+    "storybook": "storybook dev -p 6006",
+    "create:component": "node ./scripts/create-component.cjs"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
