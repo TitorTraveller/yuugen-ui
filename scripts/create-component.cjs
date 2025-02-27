@@ -29,51 +29,64 @@ rl.question("📛 Component name: ", (componentName) => {
 import { styles } from "./${componentName}.styles";
 
 interface ${componentName}Props {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }
 
-function ${componentName}({ children }: ${componentName}Props) {
-  return <div style={styles.container}>{children}</div>;
+function ${componentName}({ children, ...props }: ${componentName}Props) {
+	return (
+		<div {...props} sx={styles()}>
+			{children}
+		</div>
+	);
 }
 
-export default ${componentName};
-  `;
+export default ${componentName};`;
 
-	const stylesTemplate = `export const styles = {
-  container: {
-    padding: "10px",
-    border: "1px solid #ccc",
-    borderRadius: "4px",
-  },
+	const stylesTemplate = `import theme from "../../styles/theme";
+import { CSSProperties } from "@mui/material/styles/createMixins";
+export function styles(variant: "primary" | "secondary", size: "medium" | "small"): CSSProperties {
+
+	const baseStyle: CSSProperties = {
+	/*Component Base Styles*/
 };
-  `;
+
+const variants = {
+	/*Component Variants Styles*/
+};
+
+const sizes = {
+  /*Component Sizes Styles */
+};
+
+return {
+	...baseStyle,
+	...variants[variant],
+	...sizes[size]
+};`;
 
 	const storyTemplate = `import { Meta, StoryObj } from "@storybook/react";
-import ${componentName} from "./${componentName}";
+import ComboSelection from "./ComboSelection";
 
-const meta: Meta<typeof ${componentName}> = {
-  title: "Components/${componentName}",
-  component: ${componentName},
+const meta: Meta<typeof ComboSelection> = {
+	title: "Components/ComboSelection",
+	component: ComboSelection,
 };
-
 export default meta;
-type Story = StoryObj<typeof ${componentName}>;
 
+type Story = StoryObj<typeof ComboSelection>;
 export const Default: Story = {
-  args: {
-    children: "This is a ${componentName} component",
-  },
-};
-  `;
+	args: {
+		children: "This is a ComboSelection component",
+	},
+};`;
 
 	const indexTemplate = `import ${componentName} from "./${componentName}";
-export default ${componentName};"`;
+export default ${componentName};`;
 
 	// Create component folder
 	if (!fs.existsSync(componentDir)) {
 		fs.mkdirSync(componentDir, { recursive: true });
 	}
-
 	// Write files
 	fs.writeFileSync(componentFile, componentTemplate);
 	fs.writeFileSync(stylesFile, stylesTemplate);
@@ -81,7 +94,8 @@ export default ${componentName};"`;
 	fs.writeFileSync(indexFile, indexTemplate);
 
 	console.log(
-		`✅ Component '${componentName}' created successfully!. Check ${componentDir} route to work with your component 👌`
+		`\n✅ Component '${componentName}' created successfully!.\n🔎 Go to ${componentDir}\n to start working with your component 👌`
 	);
+
 	rl.close();
 });
